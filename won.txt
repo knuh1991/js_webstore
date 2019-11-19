@@ -1,0 +1,22 @@
+
+
+WhatsOn Scheduling System
+
+  WhatsOn is a scheduling system that provides broadcasters the ability to create a fully fledged scheduling system which includes the basic functionality of planning and scheduling content and then publishing that content either through a SOAP call or a file that is exported from the system itself. The other features are the ability to include the financial information regarding the programs.
+
+
+
+
+Product/Contract
+  - The Contracts are sent through via Hive, this is a repository where all the contract information of the deals that are owned by the Company are kept.
+    A deal is purchased and sent to WON, this information is received by WON and is processed. The information that gets sent through is the Deal information, which includes the Deal ID, of the Deal which is used in the Contract that is created.
+    The number of programs, the title of each program, the episode number, if a season has been created. Once the information is processed, several Products are created and a single Contract.
+
+    If the deal is non-existent in  WON then a Master Version of each episode and season is created. The Master Version is the original and will contain all the values that are contained in the deal. The contract will not be linked to the Master Version. The Master Version is will have the same Product Code as the regional version that are created.
+    The Regional Version will be created for each episode and season, the details contained here will match those set at the Master Version, the only differences in creation are that the contract that is linked, and the Media Assets that are generated for each episode. The Season products cannot be scheduled, as they product that contain other products.
+
+    The Contract that is linked to the regional season level, and to each individual episode. The Contracts are structured in a similar way to the season, episode structure. The Contract that is created contains the license period and the channels that the contract is valid for. The number of times it can be played out and financial information regarding the deal
+    are not present, and are entered by the finance user of each region.
+
+    The runs are updated at the contract level to include the number of times that each episode can be played out. The run functionality includes the a normal run which is a run that will be payed for and free reruns which are runs that can be played out without a charge. If the number of runs were 20, and the number of free reruns per run were set to 1, and the number of episodes were 5, than the number of free reruns would update to display .
+    The Amortization of the contract would then be added, this would include either a percentage bases such as the following '70/30'

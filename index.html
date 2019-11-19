@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Link to Bootstrap-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+    	form :focus:required:invalid {
+        border-color: #a94442;
+      }
+  </style>
+
+  <title></title>
+</head>
+<!-- The container class as a wrapper for all the content that needs to adapt tot he size of the viewport. -->
+
+<body class="container">
+  <header>
+    <h1>CoffeeRun</h1>
+  </header>
+
+  <!-- Creating the Order Form-->
+
+  <section>
+    <!-- The 'section' element has semantic meaning unlike the the 'div' or 'span' elements. The 'section' states that this is a thematic grouping of content.  -->
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form data-coffee-order="form">
+          <!-- Input elements will go here -->
+          <div class="form-group">
+            <!--The 'for' and 'id' attributes that are linked to the label and input element make it so that the relation between label and input are known, when the label is selected the text field that it is linked to is highlighted.-->
+            <label for="coffeeOrder">Order</label>
+            <!-- The '<input>' element declares a single text field, the class refers to the CSS class located in the Bootstrap CSS, the 'name' is the key, or the identifier used by the server to the connect the value that is sent through to with the input field that that sent it. -->
+            <!-- The 'autofocus' makes is it so the text field is selected when the page is loaded-->
+            <input class="form-control" name="coffee" id="coffeeOrder"
+              autofocus required pattern="[a-zA-Z\s]+">
+              <!-- The 'autofocus' set this field to be automatically selected whenever the page is loaded. The 'required' sets a validation rule that will not all the form to be submitted unless all the fields that have 'required' set have a value.-->
+              <!-- The 'pattern="[a-zA-Z\s]+"' is a regular expression  that states only the characters from 'a-z' (lower case characters), 'A-Z'(upper case characters) and '\s' (white space characters) that are repeated one or more times (+) are valid. -->
+            </div>
+
+
+          <div class="form-group">
+            <label for="emailInput">Email</label>
+            <input class="form-control" type="email" name="emailAddress" id="emailInput" value="" placeholder="dr@who.com"
+              required>
+          </div>
+
+          <div class="radio">
+            <label>
+              <input type="radio" name="size" value="short">
+              Short
+            </label>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" value="tall" checked>
+                Tall
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="size" value="grande">
+                Grande
+              </label>
+            </div>
+
+            <!--<div class="radio">
+              <label>
+                <input type="radio" name="size" value="coffee-zilla">
+                Coffee-Zilla
+              </label>
+            </div>-->
+
+
+
+            <!-- drop-down menu with list of flavours -->
+
+            <div class="form-group">
+              <label for="flavourShot">Flavour Shot</label>
+              <select id="flavourShot" class="form-control" name="flavour">
+                <option value="">None</option>
+                <option value="caramel">Caramel</options>
+                <option value="almond">Almond</option>
+                <option value="mocha">Mocha</option>
+              </select>
+            </div>
+
+
+            <div class="form-group" title="rating">
+              <label for="strengthLevel">Caffeine Rating</label>
+              <input name="strength" id="strengthLevel" type="range" value="30">
+            </div>
+
+            <!-- Sumbit and reset buttons-->
+            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Styling provided by Bootstrap -->
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4>Pending Orders:</h4>
+        <div data-coffee-order="checklist">
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+     charset="utf-8"></script>
+  <script src="scripts/validation.js" charset="utf-8"></script>
+  <script src="scripts/checklist.js" charset="utf-8"></script>
+  <script src="scripts/formhandler.js" charset="utf-8"></script>
+  <script src="scripts/remotedatastore.js" charset="utf-8"></script>
+  <script src="Scripts/truck.js" charset="utf-8"></script>
+  <script src="Scripts/datastore.js" charset="utf-8"></script>
+  <script src="Scripts/main.js" charset="utf-8"></script>
+</body>
+
+</html>

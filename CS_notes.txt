@@ -1,0 +1,313 @@
+
+
+JS Functions
+
+- This function expects to values and then uses the variable 'DETAIL_TITLE_SELECTOR' to refer tot
+  - function setDetails(imageURL, titleText) {
+    'use strict';
+    var detailImage = document.querySelector(DETAIL_TITLE_SELECTOR);
+    detailImage.setAttribute('src', imageURL);
+
+
+  }
+
+
+Object creation in JavaScript (datastore.js)
+
+    The datastore object is a simple database that will be used by the truck script to create orders, remove orders, retrieve a specific order and the ability to retrieve all the orders.
+    The CRUD functionality is not all there, a function for updating an order is not present.
+
+  // The window represents the Tab or the DOM of the page.
+  (function(window){
+    'user strict'; //Specifies to the browser that the latest version of JavaScript is being used.
+    var App = window.App || {};
+
+    function DataStore() {
+      console.log('running the DataStore function');// Console message stating that the constructor is being run.
+      this.data = {} // The 'this.data' is a unique object that is created for each DataStore function.
+    }
+
+    //The function below assigns the property add to the DataStore object, so that the function call shown below can be used to manipulate the 'this.data' object that belongs to the DataStore object which called it.
+    DataStore.prototype.add = function(key, val) {
+      this.data[key] = val
+
+    }; // The semi-colon is displayed here as to close the 'add' property that was assigned to the database object.
+
+
+
+    App.DataStore = DataStore;
+    window.App = App;
+
+  }) (window);
+
+Sharing Methods/Functions using Prototypes:
+
+  Object with shared prototype function:
+    1. function Person(name){
+        this.name = name;
+        }
+
+    # The 'sayName' function is a property of 'prototype', not the instance.
+    2. person.prototype.sayName = function(){
+        console.log(this.name);
+        }
+
+    3. p_one = new Person('p_one')
+    4. p_two = new Person('p_two')
+
+    5.p_one.sayName();
+    6.p_two.sayName();
+
+
+  Adding a shared array as a prototype property:
+
+    1. function Person(name){
+        this.name = name;
+      }
+
+    2.  person.prototype.sayName = function(){
+        console.log(this.name);
+      }
+
+    3.  person.prototype.list = []
+
+      4. p_one = new Person('p_one')
+      5. p_two = new Person('p_two')
+
+      6. p_one.list.push = 'p_one_item_one'
+      7. p_two.list.push = 'p_two_item_two'
+
+      8. p_one.list; // The list contains the input inserted by all instances of the Person Object
+      9. p_two.list; // Same as above
+
+
+
+Creating a simple JavaScript object
+
+  const person =
+    name: ['Bob','Smith'],
+    age: 32,
+    gender: 'male'
+    interests:['music', 'skiing'],
+    bio: function() {
+      alert(this.name[0] + ' ' + this.name[1] + 'is' + this.age + ' years old. He likes' + this.interests[0] + ' and ' + this.interests[1] + '.');
+      }
+    greeting: function () {
+      alert('Hi! I/'m' + this.name[0] + '.');
+    }
+
+
+  }
+
+
+Adding jQuery to JavaScript:
+  - To use jQuery a reference importing the jQuery library must be set as shown in the following;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js charset='utf-8'>." The order in which the scripts
+    are placed are important as the browser reads from top down, so if jQuery code is being used in a script that is positioned before the
+    jQuery reference than the code using the jQuery reference will not work.
+
+
+Structure of the Coffee Shop instance:
+    The code is split into three modules, the first module to be created was the DataStore module, which replicates the behaviour
+    of a database, and provides the following properties; this.data, which is the data store object that is created for each Datastore instance.
+    The methods that have been created for the DataStore are the 'add' function which adds a key and value pair to the DataStore object, the 'get' method
+    that returns the value of the key that is sent through, the remove function which removes the key-value pair from the DataStore instance, and the final method, which is the
+    'getAll' function that returns all the key-value pairs that belong to the instance.
+
+
+    Structure of the DataStore Code:
+
+    (function(window) {
+
+      'use strict';
+
+      var App = window.App || {};
+
+      //Constructor
+      function DataStore() {
+        console.log('running the DataStore function');
+        this.data = {}; //  A object with the reference name data is created for each instance.
+      }
+
+
+      //Class Method : The 'DataStore.prototype.' is prefixed to the method name so that other objects instances may call the method using the DataStore object reference.
+      DataStore.prototype.add = function (key,val) {
+        this.data[key] =  val;
+      };
+
+      The code below makes the DataStore object global via the 'window.App = App;' statement.
+      App.DataStore = DataStore;
+      window.App = App;
+    }) (window);
+
+
+    Executing this code in the console:
+
+    var dataObj = new App.DataStore();
+
+    dataObj.add('key','val')
+
+    Outcome - A new key, value pair have been added.
+
+    dataObj.get('key')
+
+    Console output: print(value)
+
+
+
+Adding the Submit Handler Coffee Shop:
+
+This area covers the submitting of the form. The reason this is being written down into the document is that the method in which this implemented
+has left me baffled, so by writing it down and explaining as if explaining the concept to someone who does not understand it is the best approach.
+
+
+Function:
+  FormHandler.prototype.addSubmitHandler =  function () {
+    console.log('running the addSubmitHandler function');
+
+    // The 'this' refers to the current instance. The '$' signifies that the element is a reference to the jQuery element,
+    // which is the reference to the form element 'data-coffee-order' which is the form's name.
+
+    this.$formElement.on('submit',function(event) {
+
+
+    })
+  };
+
+
+The Main.js file in the CoffeeShop Project
+
+The Main.js file is a file that contains all the other Javascript modules and places them together so that they can interact. The concept of having a script which deals with the interactions is in other languages, but the method in which it chooses to interact with other
+Javascript modules is not very clear.
+
+Line 1 A IIFE (Immediately Invoked Function Expression) function with the window object as the expected parameter is created. It is a design pattern which is also known as a Self-Executing Anonymous Function.
+Line 2 The 'use strict'; tells the browser that the ES6 version of JavaScript is being used.
+Line 3 & 4: The 3rd and 4th Line are variables that hold the two element names, one refers to the 'Form', and the other refers to the 'checklist'.
+Line 5: The var 'App' points to the
+Line 6: Initializes a reference to App.Truck.
+Line 7: Initializes a reference to App.DataStore
+Line 8: Initializes a reference to App.FormHandler
+Line 9: Initializes a reference to App.Validation
+Line 10: The 'myTruck' reference points to the initialized Truck instance.
+Line 11: The 'formHandler' reference points to the initialized FormHandler instance.
+Line 12: The 'CheckList' reference points to the intialized CheckList instance.
+Line 13: The 'window.myTruck = myTruck'  makes 'myTruck' now global and usable.
+Line 14: The 'checkList = new CheckList(CHECKLIST_SELECTOR);' initializes the checkList object and passes to the constructor the element name.
+
+Line 15 - 19:
+
+
+""" MAIN.JS File """
+
+1: (function(window){
+2:  'use strict';
+
+3:  var FORM_SELECTOR = '[data-coffee-order="form"]';
+4:  var CHECKLIST_SELECTOR = '[data-coffee-order="checklist"]'
+
+5:  var App = window.App;
+6:  var Truck = App.Truck;
+7:  var DataStore = App.DataStore;
+8:  var FormHandler = App.FormHandler;
+9:  var Validation = App.Validation;
+
+10:  var myTruck = new Truck('ncc-1701', new DataStore());
+
+11: var formHandler = new FormHandler(FORM_SELECTOR);
+12: var CheckList = App.CheckList;
+
+13:  window.myTruck = myTruck;
+14: var checkList = new CheckList(CHECKLIST_SELECTOR);
+
+
+15: formHandler.addSubmitHandler(
+16:  function(data) {
+17:    myTruck.createOrder.call(myTruck, data);
+18:    checkList.addRow.call(checkList,data);
+
+19:    });
+
+
+20:    formHandler.addInputHandler(Validation.isCompanyEmail);
+
+21:    console.log(FormHandler);
+
+
+
+23: })(window4);
+
+""" END MAIN.JS""""
+
+###---------------AJAX----------------------###
+
+  AJAX:  Asynchronous JavaScript And XML, it is now used for Asynchronous data communication, regardless of what technologies are actually involved.
+  The Asynchronous here means that when the App sends data to the server it does not have to wait for a reply, it can instead continue on doing other tasks.
+  AJAX is now the standard mechanism for sending and receiving data in the background.
+
+  XMLHttpRequestObjects
+
+  At the core of Ajax is the XMLHttpRequest API. In modern browser, you can instantiate new XMLHttpRequest objects, which allow you to send requests to servers without causing a page to reload.
+
+  Using XMLHttpRequest objects, you can attach callbacks to different stages of the request/response cycle, much in the same way that you listen to events on DOM objects.
+  You can also inspect the XMLHttpRequest object's properties to access information about the status of the request/response cycle. Two useful properties are 'response' and 'status',
+  which are updated as soon as any changes occur. The 'response' status contains (HTML,XML,JSON, or another format) sent back to the server. The status is a numeric code that tells you whether the HTTP response was successful or not.
+  These are officially known as HTTP Status Codes.
+
+  Status Codes:
+    200: OK : The request was successful
+
+    400: Bad Request: The server did not understand the request
+
+    404: Not Found: The resource could not be found, often because the file or path name did not match anything on the server.
+
+    500: Internal Server Error: The server encountered an error, such as an unhandled exception in the server-side code.
+
+    503: Service Unavailable : The server could not handle the request, often because it is overloaded or down for maintenance.
+
+  jQuery has a number of methods that create and manage XMLHttpRequest objects and provide a concise, backward-compatible, cross-browser API. It is not only library Unavailable for managing Ajax request, but many other libraries simply follow jQuery's lead.
+
+
+JS
+  - INHERITANCE:
+
+  ❶ function Rectangle(length, width) {
+      this.length = length;
+      this.width = width;
+  }
+
+  Rectangle.prototype.getArea = function() {
+      return this.length * this.width;
+  };
+
+  Rectangle.prototype.toString = function() {
+      return "[Rectangle " + this.length + "x" + this.width + "]";
+  };
+
+  // inherits from Rectangle
+❷ function Square(size) {
+      this.length = size;
+      this.width = size;
+  }
+
+  Square.prototype = new Rectangle();   // The methods that are associated with the Rectangle are inherited by the Square as Prototypes.
+  Square.prototype.constructor = Square; // The constructor prototype which is currently using the Rectangle constructor is assigned the Square object as the constructor.
+
+  Square.prototype.toString = function() { // The toString prototype method is updated to so that it refers to the Square object instance.
+      return "[Square " + this.length + "x" + this.width + "]";
+  };
+
+  var rect = new Rectangle(5, 10);
+  var square = new Square(6);
+
+  console.log(rect.getArea());        // 50
+  console.log(square.getArea());      // 36
+
+  console.log(rect.toString());       // "[Rectangle 5x10]"
+  console.log(square.toString());     // "[Square 6x6]"
+
+  console.log(rect instanceof Rectangle);     // true
+  console.log(rect instanceof Object);        // true
+
+  console.log(square instanceof Square);      // true
+  console.log(square instanceof Rectangle);   // true
+  console.log(square instanceof Object);      // true
